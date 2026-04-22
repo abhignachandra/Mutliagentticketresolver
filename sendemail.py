@@ -5,7 +5,7 @@ from email.mime.multipart import MIMEMultipart
 # Replace these with your actual SMTP credentials
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-SENDER_EMAIL = "abhignachandra99@yahoo.com"
+SENDER_EMAIL = "abhignachandra7@gmail.com"
 SENDER_PASSWORD = "vltu atnh ekit vuyd"  # Use App Password for Gmail
 
 

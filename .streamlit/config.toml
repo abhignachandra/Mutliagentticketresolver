@@ -1,0 +1,20 @@
+[server]
+headless = true
+enableCORS = false
+enableXsrfProtection = true
+# Azure App Service listens on the port set via $PORT env var; Streamlit
+# can't read $PORT directly from config.toml, so we pass --server.port on
+# the command line in startup.txt. This value is a safe fallback for local.
+port = 8501
+address = "0.0.0.0"
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "dark"
+primaryColor = "#00e5ff"
+backgroundColor = "#06080f"
+secondaryBackgroundColor = "#0f1629"
+textColor = "#f5f7fa"
+font = "sans serif"

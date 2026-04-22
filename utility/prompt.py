@@ -1,6 +1,9 @@
 """System prompts used by the agents."""
 
-classifier_prompt = """You are an IT ticket classifier.
+from utility.guardrails import SAFETY_HEADER
+
+classifier_prompt = SAFETY_HEADER + """
+You are an IT ticket classifier.
 
 Your task is to classify a given user-submitted IT support ticket into one of the following categories:
 
