@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1050" font-family="Helvetica, Arial, sans-serif">
+  <!-- Palette:
+       bg:     #F6F8FB
+       navy:   #0A2540
+       teal:   #065A82
+       accent: #00A896
+       gray:   #64748B
+       danger: #E76F51
+  -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0A2540"/>
+    </marker>
+    <marker id="arrowAccent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#00A896"/>
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#0A2540" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- background -->
+  <rect width="1600" height="1050" fill="#F6F8FB"/>
+
+  <!-- title -->
+  <text x="800" y="50" font-size="28" font-weight="700" fill="#0A2540" text-anchor="middle">SupportX AI Assist — System Architecture</text>
+  <text x="800" y="78" font-size="15" fill="#64748B" text-anchor="middle">Multi-Agent IT Ticket Resolution (AutoGen 0.4 · Azure OpenAI · Azure AI Search · Streamlit)</text>
+
+  <!-- ============ Layer 1: User ============ -->
+  <g filter="url(#shadow)">
+    <rect x="680" y="110" width="240" height="66" rx="10" fill="#0A2540"/>
+  </g>
+  <text x="800" y="142" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="middle">End User</text>
+  <text x="800" y="163" font-size="13" fill="#B5C4DB" text-anchor="middle">Chrome / any browser</text>
+
+  <!-- arrow down -->
+  <line x1="800" y1="178" x2="800" y2="212" stroke="#0A2540" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="812" y="200" font-size="12" fill="#64748B">HTTPS</text>
+
+  <!-- ============ Layer 2: Streamlit UI ============ -->
+  <g filter="url(#shadow)">
+    <rect x="520" y="215" width="560" height="92" rx="10" fill="#FFFFFF" stroke="#065A82" stroke-width="2"/>
+  </g>
+  <text x="800" y="245" font-size="18" font-weight="700" fill="#065A82" text-anchor="middle">Streamlit UI — app.py</text>
+  <text x="800" y="266" font-size="13" fill="#1E293B" text-anchor="middle">Input box · Resolve button · Feedback · Double-confirm escalation</text>
+  <text x="800" y="287" font-size="12" fill="#64748B" text-anchor="middle">validate_input · looks_like_injection · wrap_user_input · sanitize_output · rate limits</text>
+
+  <!-- arrow down -->
+  <line x1="800" y1="309" x2="800" y2="345" stroke="#0A2540" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="812" y="333" font-size="12" fill="#64748B">async call</text>
+
+  <!-- ============ Layer 3: Orchestrator ============ -->
+  <g filter="url(#shadow)">
+    <rect x="420" y="348" width="760" height="72" rx="10" fill="#00A896"/>
+  </g>
+  <text x="800" y="378" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="middle">RoundRobinGroupChat — Orchestrator (AutoGen)</text>
+  <text x="800" y="400" font-size="13" fill="#E5FFFB" text-anchor="middle">Classifier → KnowledgeBase → Notification (only on failure) · TextMentionTermination("TERMINATE")</text>
+
+  <!-- fan-out lines -->
+  <line x1="560" y1="420" x2="280" y2="472" stroke="#00A896" stroke-width="2" marker-end="url(#arrowAccent)"/>
+  <line x1="800" y1="420" x2="800" y2="472" stroke="#00A896" stroke-width="2" marker-end="url(#arrowAccent)"/>
+  <line x1="1040" y1="420" x2="1320" y2="472" stroke="#00A896" stroke-width="2" marker-end="url(#arrowAccent)"/>
+
+  <!-- ============ Layer 4: Three Agents ============ -->
+  <!-- Classifier -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="475" width="400" height="120" rx="10" fill="#FFFFFF" stroke="#065A82" stroke-width="2"/>
+  </g>
+  <rect x="80" y="475" width="6" height="120" fill="#065A82"/>
+  <text x="104" y="505" font-size="17" font-weight="700" fill="#065A82">1. ClassifierAgent</text>
+  <text x="104" y="530" font-size="13" fill="#1E293B">Labels ticket → JSON</text>
+  <text x="104" y="550" font-size="12" fill="#64748B">Network · Hardware · Software · Access ·</text>
+  <text x="104" y="567" font-size="12" fill="#64748B">Password Reset · Other</text>
+  <text x="104" y="585" font-size="11" fill="#64748B" font-style="italic">autogen AssistantAgent</text>
+
+  <!-- KnowledgeBase -->
+  <g filter="url(#shadow)">
+    <rect x="600" y="475" width="400" height="120" rx="10" fill="#FFFFFF" stroke="#065A82" stroke-width="2"/>
+  </g>
+  <rect x="600" y="475" width="6" height="120" fill="#065A82"/>
+  <text x="624" y="505" font-size="17" font-weight="700" fill="#065A82">2. KnowledgeBaseAgent</text>
+  <text x="624" y="530" font-size="13" fill="#1E293B">Vector-searches resolution guides</text>
+  <text x="624" y="550" font-size="12" fill="#64748B">Tool: search_similar_solution</text>
+  <text x="624" y="567" font-size="12" fill="#64748B">reflect_on_tool_use = True</text>
+  <text x="624" y="585" font-size="11" fill="#64748B" font-style="italic">Returns fix OR "escalate"</text>
+
+  <!-- Notification -->
+  <g filter="url(#shadow)">
+    <rect x="1120" y="475" width="400" height="120" rx="10" fill="#FFFFFF" stroke="#E76F51" stroke-width="2"/>
+  </g>
+  <rect x="1120" y="475" width="6" height="120" fill="#E76F51"/>
+  <text x="1144" y="505" font-size="17" font-weight="700" fill="#E76F51">3. NotificationAgent</text>
+  <text x="1144" y="530" font-size="13" fill="#1E293B">Escalates unresolved tickets</text>
+  <text x="1144" y="550" font-size="12" fill="#64748B">Tool: escalate_ticket_with_email</text>
+  <text x="1144" y="567" font-size="12" fill="#64748B">Exactly-once · ticket ID traced</text>
+  <text x="1144" y="585" font-size="11" fill="#64748B" font-style="italic">Only runs on KB failure</text>
+
+  <!-- arrows to tools -->
+  <line x1="800" y1="595" x2="800" y2="635" stroke="#0A2540" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="1320" y1="595" x2="1320" y2="635" stroke="#0A2540" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ============ Layer 5: Tools ============ -->
+  <g filter="url(#shadow)">
+    <rect x="600" y="640" width="400" height="80" rx="10" fill="#EAF3F9" stroke="#065A82" stroke-dasharray="4,3"/>
+  </g>
+  <text x="800" y="668" font-size="15" font-weight="700" fill="#065A82" text-anchor="middle">Tool: search_similar_solution</text>
+  <text x="800" y="688" font-size="12" fill="#1E293B" text-anchor="middle">embed(query) → Azure AI Search vector query</text>
+  <text x="800" y="707" font-size="11" fill="#64748B" text-anchor="middle">tools/knowledge_base_tool.py</text>
+
+  <g filter="url(#shadow)">
+    <rect x="1120" y="640" width="400" height="80" rx="10" fill="#FDECE7" stroke="#E76F51" stroke-dasharray="4,3"/>
+  </g>
+  <text x="1320" y="668" font-size="15" font-weight="700" fill="#E76F51" text-anchor="middle">Tool: escalate_ticket_with_email</text>
+  <text x="1320" y="688" font-size="12" fill="#1E293B" text-anchor="middle">SMTP send · PII-redacted body · JSONL fallback</text>
+  <text x="1320" y="707" font-size="11" fill="#64748B" text-anchor="middle">tools/send_email.py</text>
+
+  <!-- arrows to external services -->
+  <line x1="800" y1="720" x2="800" y2="768" stroke="#0A2540" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="1320" y1="720" x2="1320" y2="768" stroke="#0A2540" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ============ Layer 6: External Services ============ -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="770" width="400" height="70" rx="10" fill="#0A2540"/>
+  </g>
+  <text x="280" y="800" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">Azure OpenAI</text>
+  <text x="280" y="822" font-size="12" fill="#B5C4DB" text-anchor="middle">gpt-4o chat + text-embedding-3-small</text>
+
+  <g filter="url(#shadow)">
+    <rect x="600" y="770" width="400" height="70" rx="10" fill="#0A2540"/>
+  </g>
+  <text x="800" y="800" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">Azure AI Search (vector index)</text>
+  <text x="800" y="822" font-size="12" fill="#B5C4DB" text-anchor="middle">it-ticket-solutions-index · HNSW · 1536-dim</text>
+
+  <g filter="url(#shadow)">
+    <rect x="1120" y="770" width="400" height="70" rx="10" fill="#0A2540"/>
+  </g>
+  <text x="1320" y="800" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">SMTP (Gmail + App Password)</text>
+  <text x="1320" y="822" font-size="12" fill="#B5C4DB" text-anchor="middle">TLS 587 · fallback → escalations.jsonl</text>
+
+  <!-- dashed arrows from agents to Azure OpenAI -->
+  <path d="M 280 475 Q 160 650 180 770" fill="none" stroke="#065A82" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+  <text x="90" y="660" font-size="11" fill="#065A82" font-style="italic">LLM calls</text>
+  <path d="M 700 475 Q 520 680 440 770" fill="none" stroke="#065A82" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+
+  <!-- ============ Side panel: Guardrails & Observability ============ -->
+  <g filter="url(#shadow)">
+    <rect x="1550" y="215" width="40" height="625" rx="8" fill="#00A896" opacity="0.15"/>
+  </g>
+  <!-- (decorative gutter removed — kept to 1600 wide) -->
+
+  <!-- Guardrails callout on left -->
+  <g filter="url(#shadow)">
+    <rect x="30" y="215" width="40" height="625" rx="8" fill="#00A896" opacity="0.15"/>
+  </g>
+
+  <!-- Bottom row: Guardrails + Observability boxes -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="870" width="700" height="140" rx="10" fill="#FFFFFF" stroke="#00A896" stroke-width="2"/>
+  </g>
+  <rect x="80" y="870" width="6" height="140" fill="#00A896"/>
+  <text x="104" y="898" font-size="16" font-weight="700" fill="#00A896">Cross-Cutting: utility/guardrails.py</text>
+  <text x="104" y="922" font-size="12" fill="#1E293B">INPUT    · length/empty validation · injection heuristic · input wrapping</text>
+  <text x="104" y="942" font-size="12" fill="#1E293B">OUTPUT   · strips script/iframe tags · 5 000-char cap</text>
+  <text x="104" y="962" font-size="12" fill="#1E293B">PRIVACY  · redacts email, SSN, card, phone, IP, long IDs</text>
+  <text x="104" y="982" font-size="12" fill="#1E293B">LIMITS   · resolve 10/5min · escalate 3/10min (per session)</text>
+  <text x="104" y="1002" font-size="12" fill="#1E293B">PROMPT   · SAFETY_HEADER prepended to every agent system prompt</text>
+
+  <g filter="url(#shadow)">
+    <rect x="820" y="870" width="700" height="140" rx="10" fill="#FFFFFF" stroke="#065A82" stroke-width="2"/>
+  </g>
+  <rect x="820" y="870" width="6" height="140" fill="#065A82"/>
+  <text x="844" y="898" font-size="16" font-weight="700" fill="#065A82">Observability &amp; Delivery Safety</text>
+  <text x="844" y="922" font-size="12" fill="#1E293B">Structured logs · TimedRotatingFileHandler (daily, 7 backups)</text>
+  <text x="844" y="942" font-size="12" fill="#1E293B">All log lines PII-redacted via redact_for_log()</text>
+  <text x="844" y="962" font-size="12" fill="#1E293B">Email body redacted via redact_for_email()</text>
+  <text x="844" y="982" font-size="12" fill="#1E293B">SMTP failure → append to escalations.jsonl (never lose a ticket)</text>
+  <text x="844" y="1002" font-size="12" fill="#1E293B">Deployment: Docker (linux/amd64) → ACR → Azure App Service B1</text>
+</svg>

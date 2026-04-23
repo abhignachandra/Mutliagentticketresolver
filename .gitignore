@@ -24,3 +24,4 @@ escalations.jsonl
 .idea/
 .DS_Store
 *.swp
+~$* # ignore the PowerPoint lock file

@@ -1,0 +1,36 @@
+# ============================================================
+# Copy this file to `terraform.tfvars` and fill in your values.
+# Never commit terraform.tfvars to git (it has secrets).
+# ============================================================
+
+subscription_id     = "YOUR-AZURE-SUBSCRIPTION-ID"
+resource_group_name = "rg-intelligent-ticket"
+location            = "eastasia"
+
+# Must be globally unique, lowercase, no dashes (5-50 chars)
+acr_name = "intelligenticketresolver01"
+
+# Must be globally unique (will become https://<app_name>.azurewebsites.net)
+app_name = "intelligentticketcollector01"
+
+image_name = "intelligent-ticket-resolver"
+image_tag  = "latest"
+
+# -------- Azure OpenAI --------
+azure_openai_endpoint             = "https://YOUR-OPENAI.cognitiveservices.azure.com/"
+azure_openai_api_key              = "YOUR-OPENAI-KEY"
+azure_openai_api_version          = "2024-12-01-preview"
+azure_openai_deployment           = "gpt-4o"
+azure_openai_model                = "gpt-4o-2024-11-20"
+azure_openai_embedding_deployment = "text-embedding-3-small"
+
+# -------- Azure AI Search --------
+azure_search_endpoint = "https://YOUR-SEARCH.search.windows.net"
+azure_search_key      = "YOUR-SEARCH-KEY"
+
+# -------- Email --------
+smtp_server     = "smtp.gmail.com"
+smtp_port       = "587"
+sender_email    = "you@gmail.com"
+sender_password = "your-16-char-app-password"
+support_email   = "support@example.com"

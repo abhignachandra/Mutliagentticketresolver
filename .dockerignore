@@ -1,0 +1,37 @@
+# Secrets — NEVER ship these inside the image
+.env
+.env.local
+.env.*.local
+
+# Virtualenvs (host Python, not container Python)
+venv/
+.venv/
+env/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Git history — not needed at runtime
+.git/
+.gitignore
+
+# Logs / fallback queue — runtime artifacts, regenerate inside the container
+logs/
+*.log
+escalations.jsonl
+
+# IDE / OS junk
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# Dev-only files that don't need to ship
+agenttest.py
+agenttest2.py
+groupchat.py
+create_and_upload_index.py
+startup.txt

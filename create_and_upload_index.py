@@ -27,7 +27,10 @@ AZURE_SEARCH_INDEX_NAME = "it-ticket-solutions-index"
 
 AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
 AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
-AZURE_OPENAI_DEPLOYMENT = os.getenv("AZURE_OPENAI_DEPLOYMENT")  # e.g.,
+AZURE_OPENAI_DEPLOYMENT = os.getenv("AZURE_OPENAI_DEPLOYMENT")  # e.g., gpt-4o (chat)
+AZURE_OPENAI_EMBEDDING_DEPLOYMENT = os.getenv(
+    "AZURE_OPENAI_EMBEDDING_DEPLOYMENT", AZURE_OPENAI_DEPLOYMENT
+)  # e.g., text-embedding-3-small
 AZURE_OPENAI_API_VERSION = "2024-12-01-preview"
 
 DATA_FILE = "data/knowledge_base.json"
@@ -80,7 +83,7 @@ def create_index():
 def embed_text(text: str):
     response = openai_client.embeddings.create(
         input=[text],
-        model=AZURE_OPENAI_DEPLOYMENT
+        model=AZURE_OPENAI_EMBEDDING_DEPLOYMENT
     )
     return response.data[0].embedding
 
